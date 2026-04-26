@@ -27,5 +27,4 @@
   - DNS probing via SSL/TLS certificate inspection
   - Banner grabbing for service identification
 
-- Target probing
-  - Detection of live hosts and reachable services
+
