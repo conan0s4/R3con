@@ -4,6 +4,12 @@
   Passive • Active • Enumeration • Probing
 </p>
 
+<p align="center">
+  <img src="https://img.shields.io/badge/status-active-black?style=flat-square">
+  <img src="https://img.shields.io/badge/focus-web--pentesting-critical?style=flat-square">
+  <img src="https://img.shields.io/badge/type-reconnaissance-blue?style=flat-square">
+</p>
+
 ---
 
 ## Overview
@@ -18,19 +24,8 @@
   - Domain enumeration using public data sources (e.g., crt.sh)
 
 - Active recon
-  - DNS probing
-  - SSL/TLS certificate inspection
-
-- Banner grabbing
-  - Service and technology identification
+  - DNS probing via SSL/TLS certificate inspection
+  - Banner grabbing for service identification
 
 - Target probing
   - Detection of live hosts and reachable services
-
----
-
-## Notes
-
-- Focused on web targets
-- Designed for structured recon workflows
-- Emphasizes speed and asynchronous execution
