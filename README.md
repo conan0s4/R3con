@@ -1,7 +1,7 @@
 <h1 align="center">R3con</h1>
 <p align="center">
   <b>Web-Focused Reconnaissance Tool</b><br>
-  • Passive • Active 
+   Passive • Active 
 </p>
 
 <p align="center">
