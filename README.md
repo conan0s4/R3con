@@ -1,81 +1,36 @@
 <h1 align="center">R3con</h1>
 <p align="center">
-  <b>Web-Focused Reconnaissance Tool</b><br>
-   Passive • Active 
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/status-active-black?style=flat-square">
-  <img src="https://img.shields.io/badge/focus-web--pentesting-critical?style=flat-square">
-  <img src="https://img.shields.io/badge/type-reconnaissance-blue?style=flat-square">
+  <b>Web Reconnaissance Tool</b><br>
+  Passive • Active • Enumeration • Probing
 </p>
 
 ---
 
 ## Overview
 
-**R3con** is a reconnaissance tool built for web penetration testing, supporting both passive and active recon techniques.
-
-It is designed to gather and organize actionable intelligence on domains and web targets during the early stages of an assessment.
-
----
-
-## Core Concept
-
-R3con follows a simple workflow:
-
-Enumerate → Probe → Extract → Understand
-
-The goal is to provide a structured and efficient approach to mapping a target’s web attack surface.
+**R3con** is a reconnaissance tool for passive and active recon, built for web penetration testing. It acts as a lightweight framework that combines multiple recon techniques into a single workflow.
 
 ---
 
 ## Features
 
-- Passive reconnaissance
-  - Domain intelligence gathering from external sources
-  - Subdomain enumeration
+- Passive recon
+  - Domain enumeration using public data sources (e.g., crt.sh)
 
-- Active reconnaissance
+- Active recon
   - DNS probing
-  - Live host detection
-
-- Domain enumeration
-  - Discovery of subdomains and related assets
-  - Expansion of attack surface visibility
-
-- Probing engine
-  - Identification of reachable targets
-  - Validation of active services
+  - SSL/TLS certificate inspection
 
 - Banner grabbing
-  - Extraction of service-level metadata
-  - Identification of technologies and entry points
+  - Service and technology identification
 
----
-
-## Philosophy
-
-R3con is focused and minimal by design.
-
-It is built to provide a clear and usable view of a target’s web attack surface without unnecessary complexity.
-
----
-
-## Status
-
-Actively being developed and refined for performance, accuracy, and structured recon workflows.
+- Target probing
+  - Detection of live hosts and reachable services
 
 ---
 
 ## Notes
 
-- Focused on web targets rather than general network scanning
-- Designed for penetration testing and CTF workflows
-- Built with an emphasis on speed, clarity, and asynchronous execution
-
----
-
-<p align="center">
-  <i>"Good recon wins engagements before exploitation begins."</i>
-</p>
+- Focused on web targets
+- Designed for structured recon workflows
+- Emphasizes speed and asynchronous execution
