@@ -1,6 +1,6 @@
 <h1 align="center">R3con</h1>
 <p align="center">
-  <b>Web-Focused Reconnaissance Framework</b><br>
+  <b>Web-Focused Reconnaissance Tool</b><br>
   Passive • Active • Enumeration • Probing
 </p>
 
@@ -12,72 +12,70 @@
 
 ---
 
-## ⚡ Overview
+## Overview
 
-**R3con** is a reconnaissance tool built for **web penetration testing workflows**, combining passive and active techniques into a streamlined recon process.
+**R3con** is a reconnaissance tool built for web penetration testing, supporting both passive and active recon techniques.
 
-It focuses on gathering **actionable intelligence** from domains and web targets during the earliest phase of an engagement — where surface mapping defines everything that follows.
-
----
-
-## 🧠 Core Concept
-
-R3con is designed with a simple mindset:
-
-> Enumerate → Probe → Extract → Understand
-
-Instead of treating recon as scattered scripts, R3con acts as a **focused recon utility** for structured data collection.
+It is designed to gather and organize actionable intelligence on domains and web targets during the early stages of an assessment.
 
 ---
 
-## 🚀 Features
+## Core Concept
 
-- 🔍 **Passive Reconnaissance**
-  - Domain intelligence gathering via external sources
+R3con follows a simple workflow:
+
+Enumerate → Probe → Extract → Understand
+
+The goal is to provide a structured and efficient approach to mapping a target’s web attack surface.
+
+---
+
+## Features
+
+- Passive reconnaissance
+  - Domain intelligence gathering from external sources
   - Subdomain enumeration
 
-- ⚡ **Active Reconnaissance**
+- Active reconnaissance
   - DNS probing
   - Live host detection
 
-- 🌐 **Domain Enumeration**
-  - Discover subdomains and related assets
-  - Expand attack surface visibility
+- Domain enumeration
+  - Discovery of subdomains and related assets
+  - Expansion of attack surface visibility
 
-- 📡 **Probing Engine**
-  - Identify reachable targets
-  - Validate active services
+- Probing engine
+  - Identification of reachable targets
+  - Validation of active services
 
-- 🛰️ **Banner Grabbing**
-  - Extract service-level metadata
-  - Identify technologies and potential entry points
-
----
-
-## 🧩 Philosophy
-
-R3con isn't trying to be everything.
-
-It is built to do one thing well:
-
-> **Give you a clear, fast, and usable view of your target’s web attack surface.**
+- Banner grabbing
+  - Extraction of service-level metadata
+  - Identification of technologies and entry points
 
 ---
 
-## 🛠️ Status
+## Philosophy
 
-Actively being developed and refined for performance, accuracy, and cleaner recon workflows.
+R3con is focused and minimal by design.
+
+It is built to provide a clear and usable view of a target’s web attack surface without unnecessary complexity.
 
 ---
 
-## 📌 Notes
+## Status
 
-- Focused on **web targets**, not general network scanning
-- Designed to integrate into **pentesting and CTF workflows**
-- Built with an emphasis on **speed, clarity, and async execution**
+Actively being developed and refined for performance, accuracy, and structured recon workflows.
+
+---
+
+## Notes
+
+- Focused on web targets rather than general network scanning
+- Designed for penetration testing and CTF workflows
+- Built with an emphasis on speed, clarity, and asynchronous execution
 
 ---
 
 <p align="center">
-  <i>"Good recon wins engagements before exploitation even begins."</i>
+  <i>"Good recon wins engagements before exploitation begins."</i>
 </p>
