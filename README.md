@@ -1,7 +1,7 @@
 <h1 align="center">R3con</h1>
 <p align="center">
   <b>Web Reconnaissance Tool</b><br>
-  Passive • Active
+  Passive • Active • Automated Dorking
 </p>
 
 <p align="center">
@@ -20,11 +20,14 @@
 
 ## Features
 
-- Passive recon
+- **Passive Recon**
   - Domain enumeration using public data sources (e.g., crt.sh)
+  - **Automated Google Dorking**: Deep passive pipeline to identify sensitive leaks.
+    - Scans for **Sensitive Files**: `.env`, `.log`, `.conf`, `.sql`, and backups.
+    - Detects **Directory Listings**: Exposed "Index of" pages and parent directories.
+    - Uncovers **Hidden Portals**: Admin dashboards, login pages, and setup interfaces.
+    - Identifies **Information Leaks**: API endpoints and technical documentation.
 
-- Active recon
+- **Active Recon**
   - DNS probing via SSL/TLS certificate inspection
   - Banner grabbing for service identification
-
-
