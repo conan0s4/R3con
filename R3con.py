@@ -109,22 +109,38 @@ async def passive_mode(target):
     async def dork(target):
         # 1. SEARCH: Modular & Expanded Dork List
         dork_queries = [
-            # Sensitive Files & Environmental Leaks
+            # --- 1. THE ROADMAP (Robots & Sitemaps) ---
+            f'site:{target} filetype:txt "robots.txt" disallow',
+            f'site:{target} filetype:xml "sitemap.xml"',
+            f'site:{target} inurl:security.txt',  # Modern standard for vulnerability disclosure
+
+            # --- 2. SENSITIVE FILES & ENVIRONMENTAL LEAKS ---
             f'site:{target} ext:log OR ext:txt OR ext:conf OR ext:env OR ext:ini',
             f'site:{target} ext:sql OR ext:dbf OR ext:mdb',
             f'site:{target} ext:bkp OR ext:bak OR ext:old OR ext:backup',
-            # Directory Listing & Info Exposure
+
+            # --- 3. MODERN TECH STACK EXPOSURES (Firebase, Docker, Node) ---
+            f'site:{target} "firebaseio.com" OR "firebaseapp.com"',  # Firebase DB leaks
+            f'site:{target} inurl:docker-compose.yml OR inurl:Dockerfile',  # Container configs
+            f'site:{target} inurl:.vscode OR inurl:.idea',  # IDE metadata
+            f'site:{target} "production.json" OR "development.json"',  # Node.js/Express configs
+            f'site:{target} inurl:__next/static OR inurl:_next/data',  # Next.js data exposure
+
+            # --- 4. DIRECTORY LISTING & INFO EXPOSURE ---
             f'site:{target} intitle:"index of" "parent directory"',
             f'site:{target} intitle:"index of" "password.txt"',
             f'site:{target} intitle:phpinfo "published by the PHP Group"',
-            # Hidden Management & Auth Portals
+
+            # --- 5. HIDDEN MANAGEMENT & AUTH PORTALS ---
             f'site:{target} inurl:admin OR inurl:login OR inurl:dashboard OR inurl:setup',
             f'site:{target} inurl:wp-content OR inurl:wp-admin',
             f'site:{target} inurl:api OR inurl:v1 OR inurl:v2',
-            # Source Code & Documentation
+
+            # --- 6. SOURCE CODE & DOCUMENTATION ---
             f'site:{target} inurl:github OR inurl:gitlab OR inurl:bitbucket',
             f'site:{target} ext:json OR ext:xml OR ext:yaml OR ext:yml',
-            # Hardcoded Credentials / Error Logs
+
+            # --- 7. HARDCODED CREDENTIALS / ERROR LOGS ---
             f'site:{target} "password" OR "api_key" OR "secret" OR "token"',
             f'site:{target} "SQL syntax error" OR "mysql_fetch_array" OR "ORA-00933"'
         ]
@@ -166,6 +182,12 @@ async def passive_mode(target):
                         lower_url = clean_url.lower()
                         if any(x in lower_url for x in ['.env', '.log', '.sql', '.bak', '.old']):
                             category = "CRITICAL: Sensitive File/Backup"
+                        elif "robots.txt" in lower_url or "sitemap" in lower_url:
+                            cat = "Recon Roadmap"
+                        elif "security.txt" in lower_url:
+                            cat = "VDP/Security Policy"
+                        elif "docker" in lower_url or "firebase" in lower_url:
+                            cat = "Modern Infrastructure Leak"
                         elif "index" in lower_url or "parent" in lower_url:
                             category = "Directory Listing"
                         elif any(x in lower_url for x in ['admin', 'login', 'wp-']):
