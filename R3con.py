@@ -3,7 +3,9 @@ import httpx
 import ssl
 import socket
 import argparse
-
+import aiohttp
+import urllib.parse
+from bs4 import BeautifulSoup
 
 # note: implement more alternative options sites for dns_enumerate
 async def dns_enumerate(domain, results):
@@ -92,14 +94,96 @@ async def banner_grab(ip, domains):
 
 
 async def passive_mode(target):
+    # --- Existing DNS/IP Logic ---
     enum_results = []
     await dns_enumerate(target, enum_results)
     domains = list(set(enum_results))
     print("\n[+] Collected Domains (PASSIVE):")
     print(domains)
+
     ip_map = await resolve_domains(domains)
     print("\n[+] IP map:")
     print(ip_map)
+
+    # --- UPDATED DORKING PIPELINE ---
+    async def dork(target):
+        # 1. SEARCH: Modular & Expanded Dork List
+        dork_queries = [
+            # Sensitive Files & Environmental Leaks
+            f'site:{target} ext:log OR ext:txt OR ext:conf OR ext:env OR ext:ini',
+            f'site:{target} ext:sql OR ext:dbf OR ext:mdb',
+            f'site:{target} ext:bkp OR ext:bak OR ext:old OR ext:backup',
+            # Directory Listing & Info Exposure
+            f'site:{target} intitle:"index of" "parent directory"',
+            f'site:{target} intitle:"index of" "password.txt"',
+            f'site:{target} intitle:phpinfo "published by the PHP Group"',
+            # Hidden Management & Auth Portals
+            f'site:{target} inurl:admin OR inurl:login OR inurl:dashboard OR inurl:setup',
+            f'site:{target} inurl:wp-content OR inurl:wp-admin',
+            f'site:{target} inurl:api OR inurl:v1 OR inurl:v2',
+            # Source Code & Documentation
+            f'site:{target} inurl:github OR inurl:gitlab OR inurl:bitbucket',
+            f'site:{target} ext:json OR ext:xml OR ext:yaml OR ext:yml',
+            # Hardcoded Credentials / Error Logs
+            f'site:{target} "password" OR "api_key" OR "secret" OR "token"',
+            f'site:{target} "SQL syntax error" OR "mysql_fetch_array" OR "ORA-00933"'
+        ]
+        user_agents = [
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0",
+            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Custom/Brave"
+        ]
+        engines = ["https://www.google.com/search?q=", "https://duckduckgo.com/html/?q="]
+        results = []
+        seen_urls = set()
+        async with aiohttp.ClientSession() as session:
+            tasks = []
+            for i, query in enumerate(dork_queries):
+                engine_url = f"{engines[i % len(engines)]}{urllib.parse.quote(query)}"
+                headers = {"User-Agent": user_agents[i % len(user_agents)]}
+                async def fetch(url, h):
+                    try:
+                        async with session.get(url, headers=h, timeout=10) as r:
+                            return await r.text() if r.status == 200 else None
+                    except:
+                        return None
+                tasks.append(fetch(engine_url, headers))
+            responses = await asyncio.gather(*tasks)
+            for html in responses:
+                if not html: continue
+                soup = BeautifulSoup(html, 'html.parser')
+                for a in soup.find_all('a', href=True):
+                    raw_url = a['href']
+                    if "/url?q=" in raw_url:
+                        raw_url = raw_url.split("/url?q=")[1].split("&")[0]
+                    if not raw_url.startswith("http") or target not in raw_url:
+                        continue
+                    clean_url = raw_url.split('#')[0].split('?')[0].rstrip('/')
+                    if clean_url not in seen_urls and len(results) < 10:
+                        seen_urls.add(clean_url)
+                        # CATEGORIZE based on the expanded list
+                        category = "General Exposure"
+                        lower_url = clean_url.lower()
+                        if any(x in lower_url for x in ['.env', '.log', '.sql', '.bak', '.old']):
+                            category = "CRITICAL: Sensitive File/Backup"
+                        elif "index" in lower_url or "parent" in lower_url:
+                            category = "Directory Listing"
+                        elif any(x in lower_url for x in ['admin', 'login', 'wp-']):
+                            category = "Auth/Management Portal"
+                        elif "api" in lower_url:
+                            category = "API Endpoint"
+                        results.append({"url": clean_url, "cat": category})
+        return results
+    # --- FINAL OUTPUT ---
+    print(f"\n[*] Running Deep Passive Dorking for {target}...")
+    dork_results = await dork(target)
+    if dork_results:
+        print(f"[+] Dorking Results Found:")
+        for res in dork_results:
+            print(f"    - [{res['cat']}] {res['url']}")
+    else:
+        print("[-] No critical exposures found via dorking.")
+    return {"domains": domains, "ips": ip_map, "leaks": dork_results}
 
 
 async def active_mode(target):
@@ -121,6 +205,7 @@ async def active_mode(target):
         for port, banner in r["banners"].items():
             print(f"  Port {port}: {banner[:200]}")
         print("-----------------------------------\n")
+
 
 
 def main():
