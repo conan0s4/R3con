@@ -1,6 +1,6 @@
 <div align="center">
 
-# Surface x Dark Web Scraper
+# Scrap3r
 
 ### Web Scraping Tool for OSINT Data Extraction
 
