@@ -2,9 +2,7 @@
 
 # Scrap3r
 
-### Web Scraping Tool for OSINT Data Extraction
-
-Passive • Active Scraping
+### Web Scraping Tool : Data Extraction
 
 </div>
 
@@ -20,7 +18,7 @@ Passive • Active Scraping
 
 ## Overview
 
-Surface x Dark Web Scraper is a lightweight Python-based scraping tool used for extracting publicly available information from web pages.
+Scrap3r is a lightweight Python-based scraping tool used for extracting publicly available information from web pages.
 
 It supports both standard HTTP requests and optional Tor routing for `.onion` domains.
 
