@@ -40,3 +40,15 @@ It supports both standard HTTP requests and optional Tor routing for `.onion` do
 
 ---
 
+## Usage
+
+- Target web: URL or domain to target  
+- Use Tor: `y` or `n` to enable/disable Tor routing  
+- Timeout: request timeout  
+
+### Example
+
+```bash
+Target web >> https://example.com/
+Use Tor? [y/n] >> y
+input timeout >> 10
