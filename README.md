@@ -49,12 +49,12 @@ python recon.py --target &lt;domain&gt; [-p | -a]
   </tr>
   <tr>
     <td><code>-p</code></td>
-    <td>Passive reconnaissance mode (runs DNS enumeration only)</td>
+    <td>Passive reconnaissance mode </td>
     <td>Choose one mode</td>
   </tr>
   <tr>
     <td><code>-a</code></td>
-    <td>Active reconnaissance mode (runs DNS probing and banner grabbing)</td>
+    <td>Active reconnaissance mode </td>
     <td>Choose one mode</td>
   </tr>
 </table>
@@ -66,7 +66,3 @@ python recon.py --target example.com -p
 python recon.py --target example.com -a
 </pre>
 
-<ul>
-  <li><b>Passive Mode (-p)</b>: Safer and quieter. Performs DNS enumeration only.</li>
-  <li><b>Active Mode (-a)</b>: More aggressive. Performs DNS probing and banner grabbing.</li>
-</ul>
