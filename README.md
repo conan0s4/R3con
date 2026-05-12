@@ -26,3 +26,49 @@
 - **Active Recon**
   - DNS probing via SSL/TLS certificate inspection
   - Banner grabbing for service identification
+
+
+<h2>Usage</h2>
+
+<pre>
+python recon.py --target &lt;domain&gt; [-p | -a]
+</pre>
+
+<h3>Options</h3>
+
+<table>
+  <tr>
+    <th>Argument</th>
+    <th>Description</th>
+    <th>Required</th>
+  </tr>
+  <tr>
+    <td><code>--target</code></td>
+    <td>Target domain to perform reconnaissance on</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><code>-p</code></td>
+    <td>Passive reconnaissance mode (runs DNS enumeration only)</td>
+    <td>Choose one mode</td>
+  </tr>
+  <tr>
+    <td><code>-a</code></td>
+    <td>Active reconnaissance mode (runs DNS probing and banner grabbing)</td>
+    <td>Choose one mode</td>
+  </tr>
+</table>
+
+<h3>Examples</h3>
+
+<pre>
+python recon.py --target example.com -p
+python recon.py --target example.com -a
+</pre>
+
+<h3>Modes</h3>
+
+<ul>
+  <li><b>Passive Mode (-p)</b>: Safer and quieter. Performs DNS enumeration only.</li>
+  <li><b>Active Mode (-a)</b>: More aggressive. Performs DNS probing and banner grabbing.</li>
+</ul>
