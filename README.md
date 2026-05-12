@@ -2,7 +2,7 @@
 
 # Scrap3r
 
-### Web Scraping Tool : Data Extraction
+### Web Scraping Tool | Data Extraction
 
 </div>
 
