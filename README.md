@@ -40,9 +40,3 @@ It supports both standard HTTP requests and optional Tor routing for `.onion` do
 
 ---
 
-## Installation
-
-```bash
-git clone https://github.com/yourname/scraper.git
-cd scraper
-pip install -r requirements.txt
