@@ -1,54 +1,72 @@
-<div align="center">
-
-# Scrap3r
-
-### Web Scraping Tool | Data Extraction
-
-</div>
-
----
+<h1 align="center">R3con</h1>
+<p align="center">
+<b>Web Reconnaissance Tool</b><br>
+Passive • Active
+</p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/status-active-brightgreen" />
-  <img src="https://img.shields.io/badge/type-scraper-blue" />
-  <img src="https://img.shields.io/badge/focus-osint-red" />
+<img src="https://img.shields.io/badge/status-active-black?style=flat-square">
+<img src="https://img.shields.io/badge/focus-web--pentesting-critical?style=flat-square">
+<img src="https://img.shields.io/badge/type-reconnaissance-blue?style=flat-square">
 </p>
 
 ---
 
 ## Overview
 
-Scrap3r is a lightweight Python-based scraping tool used for extracting publicly available information from web pages.
-
-It supports both standard HTTP requests and optional Tor routing for `.onion` domains.
+**R3con** is a reconnaissance tool for passive and active recon, built for web penetration testing. It acts as a lightweight framework that combines multiple recon techniques into a single workflow.
 
 ---
 
 ## Features
 
-- Web page scraping via HTTP
-- Optional Tor routing support
-- Extract usernames (`@handles`)
-- Extract emails
-- Extract IP addresses
-- Extract domains and subdomains
-- Extract phone numbers
-- Extract links (including `.onion`)
-- HTML title and heading extraction
-- HTML comment extraction
-- Regex-based data parsing
+- **Passive Recon**
+- Domain enumeration using public data sources (e.g., crt.sh)
+- Automated Google Dorking: advanced search operators to automate OSINT collection on a target website
+- **Active Recon**
+- DNS probing via SSL/TLS certificate inspection
+- Banner grabbing for service identification
 
----
 
-## Usage
+<h2>Usage</h2>
 
-- Target web: URL or domain to target  
-- Use Tor: `y` or `n` to enable/disable Tor routing  
-- Timeout: request timeout  
+<pre>
+python recon.py --target &lt;domain&gt; [-p | -a]
+</pre>
 
-### Example
+<h3>Options</h3>
 
-```bash
-Target web >> https://example.com/
-Use Tor? [y/n] >> y
-input timeout >> 10
+<table>
+  <tr>
+    <th>Argument</th>
+    <th>Description</th>
+    <th>Required</th>
+  </tr>
+  <tr>
+    <td><code>--target</code></td>
+    <td>Target domain to perform reconnaissance on</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td><code>-p</code></td>
+    <td>Passive reconnaissance mode (runs DNS enumeration only)</td>
+    <td>Choose one mode</td>
+  </tr>
+  <tr>
+    <td><code>-a</code></td>
+    <td>Active reconnaissance mode (runs DNS probing and banner grabbing)</td>
+    <td>Choose one mode</td>
+  </tr>
+</table>
+
+<h3>Examples</h3>
+
+<pre>
+python recon.py --target example.com -p
+python recon.py --target example.com -a
+</pre>
+
+<ul>
+  <li><b>Passive Mode (-p)</b>: Safer and quieter. Performs DNS enumeration only.</li>
+  <li><b>Active Mode (-a)</b>: More aggressive. Performs DNS probing and banner grabbing.</li>
+</ul>
